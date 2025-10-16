@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Southern Grain Timber</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      background-color: #ffffff;
+      color: #333;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    header {
+      position: relative;
+      z-index: 10;
+      padding: 2rem 0;
+      background-color: #fff;
+      border-bottom: 1px solid #ddd;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin: 0;
+    }
+
+    .carousel {
+      position: relative;
+      width: 100%;
+      max-width: 1000px;
+      margin: 3rem auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      perspective: 1000px;
+      min-height: 500px;
+      z-index: 1;
+    }
+
+    .carousel img {
+      position: absolute;
+      width: 60%;
+      max-width: 600px;
+      border-radius: 12px;
+      transition: transform 1s ease, opacity 1s ease;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      opacity: 0.5;
+      cursor: pointer;
+    }
+
+    .carousel img.active {
+      transform: translateZ(200px);
+      opacity: 1;
+      z-index: 3;
+    }
+
+    .carousel img.left1 {
+      transform: translateX(-200px) rotateY(25deg);
+      opacity: 0.7;
+      z-index: 2;
+    }
+
+    .carousel img.left2 {
+      transform: translateX(-400px) rotateY(45deg);
+      opacity: 0.4;
+      z-index: 1;
+    }
+
+    .carousel img.right1 {
+      transform: translateX(200px) rotateY(-25deg);
+      opacity: 0.7;
+      z-index: 2;
+    }
+
+    .carousel img.right2 {
+      transform: translateX(400px) rotateY(-45deg);
+      opacity: 0.4;
+      z-index: 1;
+    }
+
+    section.contact {
+      position: relative;
+      z-index: 5;
+      margin: 6rem auto;
+      max-width: 600px;
+      padding: 2rem;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      background-color: #fff;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    button {
+      background-color: #2c3e50;
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      font-size: 1rem;
+      border-radius: 6px;
+      margin-top: 15px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #34495e;
+    }
+
+    footer {
+      margin-top: 4rem;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #777;
+      border-top: 1px solid #eee;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Southern Grain Timber</h1>
+    <p>Handcrafted chopping boards made in Mount Roskill, Auckland</p>
+  </header>
+
+  <div class="carousel" id="carousel">
+    <img src="board1.png" alt="Board 1">
+    <img src="board2.png" alt="Board 2">
+    <img src="board3.png" alt="Board 3">
+    <img src="board4.png" alt="Board 4">
+    <img src="board5.png" alt="Board 5">
+    <img src="board6.png" alt="Board 6">
+    <img src="board7.png" alt="Board 7">
+    <img src="board8.png" alt="Board 8">
+    <img src="board9.png" alt="Board 9">
+    <img src="board10.png" alt="Board 10">
+  </div>
+
+  <section class="contact">
+    <h2>Order or Enquire</h2>
+    <p>Use the form below to order or request a quote. You can also pay securely via PayPal once confirmed.</p>
+    <form action="mailto:youremail@example.com" method="post" enctype="text/plain">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <textarea name="message" rows="5" placeholder="Your message or order details"></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <footer>
+    &copy; 2025 Southern Grain Timber — Handcrafted in New Zealand
+  </footer>
+
+  <script>
+    const images = document.querySelectorAll('.carousel img');
+    let activeIndex = 2;
+
+    function updateCarousel() {
+      images.forEach((img, index) => {
+        img.className = '';
+        const diff = (index - activeIndex + images.length) % images.length;
+        if (diff === 0) img.classList.add('active');
+        else if (diff === 1) img.classList.add('right1');
+        else if (diff === 2) img.classList.add('right2');
+        else if (diff === images.length - 1) img.classList.add('left1');
+        else if (diff === images.length - 2) img.classList.add('left2');
+      });
+    }
+
+    function rotateCarousel() {
+      activeIndex = (activeIndex + 1) % images.length;
+      updateCarousel();
+    }
+
+    setInterval(rotateCarousel, 3000);
+    updateCarousel();
+  </script>
+</body>
+</html>
